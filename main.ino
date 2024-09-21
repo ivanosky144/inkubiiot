@@ -12,7 +12,7 @@ float t1, h1, t2, h2, t3, h3, t4, h4;
 void setup() {
   Serial.begin(115200);
 
-  connectToWifi(ssid, password);
+  connectToWiFi(ssid, password);
 
   setupMqtt(mqtt_server, mqtt_port);
 }

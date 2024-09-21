@@ -7,7 +7,7 @@ void connectToWiFi(const char* ssid, const char* password) {
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(100);
-    Serialprint(".");
+    Serial.println(".");
   }
 
   Serial.println("Connected to WiFi");

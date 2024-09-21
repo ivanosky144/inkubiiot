@@ -1,4 +1,5 @@
 #include "dht_sensor_manager.h"
+#include <DHT.h>
 
 DHT dht1(DHTPIN1, DHTTYPE);
 DHT dht2(DHTPIN2, DHTTYPE);
