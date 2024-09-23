@@ -2,9 +2,9 @@
 #include "dht_sensor_manager.h"
 #include "mqtt_manager.h"
 
-const char* ssid = "mySSID";
-const char* password = "myPassword";
-const char* mqtt_server = "myBroker";
+const char* ssid = "vivo Y36 5G";
+const char* password = "modalbos123";
+const char* mqtt_server = "myBroker"; 
 const int mqtt_port = 1883;
 
 float t1, h1, t2, h2, t3, h3, t4, h4;
@@ -12,7 +12,9 @@ float t1, h1, t2, h2, t3, h3, t4, h4;
 void setup() {
   Serial.begin(115200);
 
+  Serial.print("Testing setup");
   connectToWiFi(ssid, password);
+  initializeDHTSensors(); 
 
   setupMqtt(mqtt_server, mqtt_port);
 }

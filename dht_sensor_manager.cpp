@@ -22,4 +22,21 @@ void readDHTSensors(float &t1, float &h1, float &t2, float &h2, float &t3, float
   t3 = dht3.readTemperature();
   h4 = dht4.readHumidity();
   t4 = dht4.readTemperature();
+
+  Serial.print("Humidity 1:");
+  Serial.print(h1);
+  Serial.print("Temperature 1:");
+  Serial.print(t1);
+  Serial.print("Humidity 2:");
+  Serial.print(h2);
+  Serial.print("Temperature 2:");
+  Serial.print(t2);
+  Serial.print("Humidity 3:");
+  Serial.print(h3);
+  Serial.print("Temperature 3:");
+  Serial.print(t3);
+  Serial.print("Humidity 4:");
+  Serial.print(h4);
+  Serial.print("Temperature 4:");
+  Serial.print(t4);
 }
