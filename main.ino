@@ -4,30 +4,39 @@
 
 const char* ssid = "vivo Y36 5G";
 const char* password = "modalbos123";
-const char* mqtt_server = "myBroker"; 
+const char* mqtt_server = "test.mosquitto.org"; 
 const int mqtt_port = 1883;
+const char* mqtt_client_id = "ESP32";  
+
+unsigned long lastPublishTime = 0;
+const unsigned long publishInterval = 5000;  
 
 float t1, h1, t2, h2, t3, h3, t4, h4;
+const int soundSensorPin = A0;
 
 void setup() {
   Serial.begin(115200);
+  Serial.println("Testing setup");
 
-  Serial.print("Testing setup");
   connectToWiFi(ssid, password);
-  initializeDHTSensors(); 
-
-  setupMqtt(mqtt_server, mqtt_port);
+  initializeDHTSensors();
+  setupMqtt(mqtt_server, mqtt_port, mqtt_client_id);  
+  pinMode(soundSensorPin, INPUT);
 }
 
 void loop() {
-  readDHTSensors(t1, t2, t3, t4, h1, h2, h3, h4);
-
-  if (isnan(h1) || isnan(t1) || isnan(h2) || isnan(t2) || isnan(h3) || isnan(t3) || isnan(h4) || isnan(t4)) {
-    Serial.println("Failed to read from DHT sensors!");
-    return;
+  if (!client.connected()) {
+    reconnectMqtt(mqtt_client_id);  
   }
+  client.loop();  
 
-  publishSensorData(t1, h1, t2, h2, t3, h3, t4, h4);
+  if (millis() - lastPublishTime >= publishInterval) {
+    lastPublishTime = millis();
+    readDHTSensors(t1, h1, t2, h2, t3, h3, t4, h4);
 
-  delay(2000);
+    int soundLevel = analogRead(soundSensorPin);
+    Serial.printf("Sound sensor level: %d\n", soundLevel);
+
+    publishSensorData(t1, h1, t2, h2, t3, h3, t4, h4, soundLevel);
+  }
 }

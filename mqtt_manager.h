@@ -6,8 +6,9 @@
 
 extern PubSubClient client;
 
-void setupMqtt(const char* mqtt_server, int mqtt_port);
-void reconnectMqtt();
-void publishSensorData(float t1, float h1, float t2, float h2, float t3, float h3, float t4, float h4);
+void setupMqtt(const char* server, int port, const char* clientID);
+void reconnectMqtt(const char* clientID);  // Updated function signature
+void publishSensorData(float t1, float h1, float t2, float h2, float t3, float h3, float t4, float h4, int soundLevel);
+void mqttCallback(char* topic, byte* payload, unsigned int length);
 
 #endif

@@ -11,6 +11,8 @@ void initializeDHTSensors() {
   dht2.begin();
   dht3.begin();
   dht4.begin();
+
+  Serial.println("DHT Sensors initialized");
 }
 
 void readDHTSensors(float &t1, float &h1, float &t2, float &h2, float &t3, float &h3, float &t4, float &h4) {
@@ -24,7 +26,7 @@ void readDHTSensors(float &t1, float &h1, float &t2, float &h2, float &t3, float
   t4 = dht4.readTemperature();
 
   Serial.print("Humidity 1:");
-  Serial.print(h1);
+  Serial.print(h1); 
   Serial.print("Temperature 1:");
   Serial.print(t1);
   Serial.print("Humidity 2:");

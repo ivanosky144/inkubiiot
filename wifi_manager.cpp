@@ -1,16 +1,11 @@
 #include "wifi_manager.h"
 
 void connectToWiFi(const char* ssid, const char* password) {
-
-  Serial.println("Connecting to WiFi");
   WiFi.begin(ssid, password);
-
+  Serial.print("Connecting to WiFi...");
   while (WiFi.status() != WL_CONNECTED) {
-    delay(100);
-    Serial.println(".");
+    delay(1000);
+    Serial.print(".");
   }
-
-  Serial.println("Connected to WiFi");
-  Serial.println("IP Address: ");
-  Serial.println(WiFi.localIP());
+  Serial.println("\n[WiFi] Connected!");
 }
